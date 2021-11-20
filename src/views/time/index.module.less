@@ -1,0 +1,33 @@
+// @font-face {
+//   font-family: 'PingFangSC';
+//   font-style: normal;
+//   font-weight: normal;
+//   src: local('PingFangSC'), url('../../assets/PingFangSC-Regular.woff2') format('woff2');
+// }
+.inner-header{
+  background: rgba(245,245,247,0.6);
+  height: 85px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 40px;
+  color: #1d1d1f;
+}
+
+.inner-body {
+  min-height: 600px;
+  margin: 12px;
+  :global {
+    .ant-collapse-header{
+      font-size: 14px;
+      font-weight: 500;
+    }
+  }
+}
+
+.card {
+  min-height: 200px;
+  background-color: bisque;
+  border-radius: 12px;
+}

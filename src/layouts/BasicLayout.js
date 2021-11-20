@@ -1,10 +1,15 @@
 import React from 'react'
-import { Route, Redirect, useLocation } from 'react-router-dom'
+import { Route, Redirect} from 'react-router-dom'
 import { ConfigProvider } from 'antd'
 import { SmileOutlined } from '@ant-design/icons'
 // import logo from '@/assets/logo.svg'
 import Home from '@/views/Home'
-import './BasicLayout.less'
+import styles from './BasicLayout.module.less'
+import classNames from 'classnames/bind'
+import Time from '@/views/time'
+import 'antd/dist/antd.css';
+
+const cx = classNames.bind(styles)
 
 const routeConfig = {
   path: '/',
@@ -15,6 +20,13 @@ const routeConfig = {
       path: '/home',
       exact: true,
       component: Home,
+    },
+    {
+      icon: <SmileOutlined />,
+      name: '',
+      path: '/time',
+      exact: true,
+      component: Time,
     },
     {
       icon: <SmileOutlined />,
@@ -49,10 +61,9 @@ const RouteFromConfig = ({ path, exact, redirect, component: Component, routes =
 )
 
 const BasicLayout = () => {
-  const location = useLocation()
-
   return ( 
-    <div>
+    <div className={cx('basic-layout')}>
+      <div className={cx('basic-layout-header')}>123</div>
       <ConfigProvider getPopupContainer={trigger => trigger?.parentNode || document.body}>
           <RouteFromConfig {...routeConfig} />
       </ConfigProvider>
