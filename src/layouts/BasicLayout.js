@@ -63,7 +63,7 @@ const RouteFromConfig = ({ path, exact, redirect, component: Component, routes =
 const BasicLayout = () => {
   return ( 
     <div className={cx('basic-layout')}>
-      <div className={cx('basic-layout-header')}>123</div>
+      <div className={cx('basic-layout-header')}>时间簿</div>
       <ConfigProvider getPopupContainer={trigger => trigger?.parentNode || document.body}>
           <RouteFromConfig {...routeConfig} />
       </ConfigProvider>
