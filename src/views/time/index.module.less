@@ -17,19 +17,34 @@
     .ant-collapse-header {
       font-size: 14px;
       font-weight: 500;
+     background-color: rgba(212, 230, 241,0.2);
+      border-radius: 20px !important;
+      color: #1B4F72 !important;
+      &--expended {
+        background-image: none;
+      }
+    }
+    .ant-collapse-content-box{
+      padding: 0 !important;
     }
   }
 }
 
 .card {
   min-height: 300px;
-  background-color: rgb(247, 244, 244);
-  border-radius: 12px;
+  // background-color: rgb(247, 247, 247);
+  // border-radius: 12px;
+  padding: 12px;
+  margin: 8px;
+  box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-// @font-face {
-//   font-family: 'PingFangSC';
-//   font-style: normal;
-//   font-weight: normal;
-//   src: local('PingFangSC'), url('../../assets/PingFangSC-Regular.woff2') format('woff2');
-// }
+.expend-icon {
+  transition: transform 0.2s ease;
+  transform: rotate(90deg);
+  margin-right: 4px;
+  &--expended {
+    transform: rotate(180deg);
+  }
+}
+

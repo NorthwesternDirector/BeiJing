@@ -1,0 +1,57 @@
+.square {
+  // background-image: linear-gradient(45deg, #e9ecef, #f8f9fa);
+  background-color: #f8f9fa;
+  // border: 1px solid #e9ecef;
+  border-radius: 12px;
+  width: 120px;
+  height: 120px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: width 0.2s ease;
+  &--expended {
+    width: 220px;
+    & .expend-icon {
+      transform: rotate(180deg);
+    }
+  }
+}
+.expend-icon {
+  transition: transform 0.2s ease;
+}
+
+.label-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.label {
+  line-height: 16px;
+  font-weight: 500;
+}
+
+.icon {
+  line-height: 38px;
+  font-size: 50px;
+  text-align: center;
+}
+
+.value {
+  overflow: hidden;
+  & > div:first-child {
+    display: inline-block;
+    min-width: 100px;
+  }
+  .good {
+    color:deepskyblue;
+  }
+  .bad {
+    color:tomato;
+  }
+  & span{
+    font-size: 20px;
+    font-weight: 600;
+  }
+}
