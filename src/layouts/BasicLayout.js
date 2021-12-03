@@ -1,13 +1,15 @@
 import React from 'react'
 import { Route, Redirect} from 'react-router-dom'
-import { ConfigProvider } from 'antd'
+import { ConfigProvider, Switch } from 'antd'
 import { SmileOutlined } from '@ant-design/icons'
 // import logo from '@/assets/logo.svg'
 import Home from '@/views/Home'
 import styles from './BasicLayout.module.less'
 import classNames from 'classnames/bind'
 import Time from '@/views/time'
+import IconFont from '@/components/IconFont'
 import 'antd/dist/antd.css';
+
 
 const cx = classNames.bind(styles)
 
@@ -63,7 +65,17 @@ const RouteFromConfig = ({ path, exact, redirect, component: Component, routes =
 const BasicLayout = () => {
   return ( 
     <div className={cx('basic-layout')}>
-      <div className={cx('basic-layout-header')}>TimeM</div>
+      <div className={cx('basic-layout-header')}>
+        <div className={cx('menu')}>
+        <div>TM</div>
+        <div>ANN</div>
+        </div>
+        <Switch
+          checkedChildren={<IconFont type=''/>}
+          unCheckedChildren={<IconFont type=''/>}
+          defaultChecked
+        />
+        </div>
       <ConfigProvider getPopupContainer={trigger => trigger?.parentNode || document.body}>
           <RouteFromConfig {...routeConfig} />
       </ConfigProvider>
