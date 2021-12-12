@@ -1,10 +1,41 @@
 import React, {useState, useEffect, useCallback} from 'react'
 import ReactECharts from 'echarts-for-react'
-import { type } from '../daliyData-2021' 
+import {Data2021, workType, type} from '../daliyData-2021'
+import moment from 'moment' 
 
-const useTimeDistributionChart = ({ data = [] }) => {
+const useTimeDistributionChart = () => {
   const [options, setOptions] = useState([])
   const [highlightIndex, setHighlightIndex] =useState()
+  const [processedData, setProcessedData] = useState([])
+
+  /**数据处理，搞一些计算数据出来 */
+  useEffect(() => {
+    const handleData = Data2021.map(i => {
+      const totalTime = +(moment(`${i['日期']} ${i['下班']}`).diff(moment(`${i['日期']} ${i['上班']}`),'second')/3600).toFixed(1)
+      const realTime = Object.values(i).reduce((acc,cur) => {
+        if(typeof(cur) === 'number'){
+          return cur + acc
+        }
+        return acc
+      }, 0)
+      const workTime = Object.keys(i).reduce((acc,cur) => {
+        if(workType.includes(cur)){
+          return i[cur] + acc
+        }
+        return acc
+      }, 0)
+      return {
+        ...i,
+        '时长': totalTime,
+        '遗忘时间': +(totalTime - realTime).toFixed(1),
+        '真实时间': realTime,
+        '常规时间': workTime
+      }
+    })
+    setHighlightIndex(handleData.length - 1)
+    setProcessedData(handleData)
+  },[])
+
    /**设置图表 */
    useEffect(() => {
     const dimensions = ['日期', ...type ]
@@ -15,7 +46,7 @@ const useTimeDistributionChart = ({ data = [] }) => {
       grid: { top: 70, right: 24, bottom: 56, left: 24 },
       dataset: {
         dimensions,
-        source: data,
+        source: processedData,
       },
       xAxis: {
         type: 'category',
@@ -39,14 +70,14 @@ const useTimeDistributionChart = ({ data = [] }) => {
       },
       dataZoom: [
         {
-          show: data.length > 10,
+          show: processedData.length > 20,
           type: 'slider',
           orient: 'horizontal',
           height: 20,
           bottom: 5,
           left: 40,
           start: 100,
-          minValueSpan: 9,
+          minValueSpan: 20,
           brushSelect: false,
           borderColor: 'none',
           backgroundColor: '#F6F7FB',
@@ -82,7 +113,7 @@ const useTimeDistributionChart = ({ data = [] }) => {
       }
     }
     setOptions(temp)
-  }, [data])
+  }, [processedData])
 
   const highlight = useCallback(params => {
     if (params.batch?.length) {    
@@ -93,7 +124,7 @@ const useTimeDistributionChart = ({ data = [] }) => {
   return [
     <ReactECharts option={options} onEvents={{highlight}}/>, 
     highlightIndex, 
-    setHighlightIndex
+    processedData,
   ]
 }
 

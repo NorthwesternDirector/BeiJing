@@ -10,8 +10,9 @@
 }
 
 .inner-body {
+  max-width: 850px;
   min-height: 600px;
-  margin: 12px;
+  margin: 12px auto;
   /* stylelint-disable-next-line selector-pseudo-class-no-unknown */
   :global {
     .ant-collapse-header {
@@ -58,6 +59,20 @@
   margin-right: 4px;
   &--expended {
     transform: rotate(180deg);
+  }
+}
+
+.card-item {
+  margin-bottom: 46px;
+}
+
+.card-item-spec {
+  display: flex;
+  &>div:first-child {
+    width: 45%;
+  }
+  &>div:last-child {
+    width: 55%;
   }
 }
 

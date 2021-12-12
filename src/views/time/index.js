@@ -1,50 +1,23 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import styles from './index.module.less'
 import classNames from 'classnames/bind'
 import {Collapse} from 'antd'
 import miniImg from '@/assets/mini.png'
-import {Data2021, workType} from './daliyData-2021' 
+import {Data2021} from './daliyData-2021' 
 import moment from 'moment'
 import IconFont from '@/components/IconFont'
 import Square from './Square'
 import useTimeDistributionChart from './TimeDistribution'
+import useTimeNodeChart from './TimeNode'
+import Percentage from './TimeNode/Percentage'
 
 const cx = classNames.bind(styles)
 
 const Time = () => {
   const [keys, setKeys] = useState([])
-  const [processedData, setProcessedData] = useState([])
-  const [TimeDistributionChart, highlightIndex, setHighlightIndex]= useTimeDistributionChart({data: processedData})
-
-  /**数据处理，搞一些计算数据出来 */
-  useEffect(() => {
-    const handleData = Data2021.map(i => {
-      const totalTime = +(moment(`${i['日期']} ${i['下班']}`).diff(moment(`${i['日期']} ${i['上班']}`),'second')/3600).toFixed(1)
-      const realTime = Object.values(i).reduce((acc,cur) => {
-        if(typeof(cur) === 'number'){
-          return cur + acc
-        }
-        return acc
-      }, 0)
-      const workTime = Object.keys(i).reduce((acc,cur) => {
-        if(workType.includes(cur)){
-          return i[cur] + acc
-        }
-        return acc
-      }, 0)
-      return {
-        ...i,
-        '时长': totalTime,
-        '遗忘时间': +(totalTime - realTime).toFixed(1),
-        '真实时间': realTime,
-        '常规时间': workTime
-      }
-    })
-    setHighlightIndex(handleData.length - 1)
-    setProcessedData(handleData)
-  },[setHighlightIndex])
-
-
+  const [TimeDistributionChart, highlightIndex, processedData]= useTimeDistributionChart()
+  const [TimeNodeChart] = useTimeNodeChart()
+  
 
   return (
     <div>
@@ -72,7 +45,11 @@ const Time = () => {
               }}
             />
           </div>
-          {TimeDistributionChart}
+          <div className={cx('card-item')}>{TimeDistributionChart}</div>
+          <div className={cx('card-item-spec')}>
+            <Percentage/>
+            {TimeNodeChart}
+            </div>
           </div>
         </Collapse.Panel>
       </Collapse>
