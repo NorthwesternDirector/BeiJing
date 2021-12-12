@@ -11,14 +11,14 @@ const formatDuring = hour => {
   return  hours ? <><span>{hours}</span>小时 <span>{minutes}</span>分钟</> : <><span>{minutes}</span>分钟</>
 }
 
-const Comp = ({ data }) => {
-  const [expend, setExpend] = useState(false)
+const Comp = ({ data, standard }) => {
+  const [expend, setExpend] = useState(true)
   const colorFn = val => {
     const num = +val.replace('%','')
-    if(num < 10){
+    if(standard[0](num)){
       return 'good'
     }
-    if(num >= 20) {
+    if(standard[1](num)) {
       return 'bad'
     }
     return undefined

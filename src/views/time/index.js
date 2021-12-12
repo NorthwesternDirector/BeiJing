@@ -10,6 +10,7 @@ import Square from './Square'
 import useTimeDistributionChart from './TimeDistribution'
 import useTimeNodeChart from './TimeNode'
 import Percentage from './TimeNode/Percentage'
+import SportTime from './SportTime'
 
 const cx = classNames.bind(styles)
 
@@ -35,6 +36,7 @@ const Time = () => {
                 percentage:((processedData[highlightIndex]?.['遗忘时间']/processedData[highlightIndex]?.['时长'])*100).toFixed(1)+'%',
                 icon:'icon-fuchouzhelianmeng-haoke'
               }}
+              standard={[num => num < 10, num => num >= 20]}
             />
             <Square 
               data={{
@@ -43,6 +45,7 @@ const Time = () => {
                 percentage:((processedData[highlightIndex]?.['常规时间']/processedData[highlightIndex]?.['真实时间'])*100).toFixed(1)+'%',
                 icon:'icon-fuchouzhelianmeng-meiguoduichang'
               }}
+              standard={[num => num >= 75, num => num < 60]}
             />
           </div>
           <div className={cx('card-item')}>{TimeDistributionChart}</div>
@@ -51,6 +54,7 @@ const Time = () => {
             {TimeNodeChart}
             </div>
           </div>
+          <div className={cx('card-item')}><SportTime/></div>
         </Collapse.Panel>
       </Collapse>
       </div>
