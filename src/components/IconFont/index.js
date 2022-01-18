@@ -1,9 +1,8 @@
- import { createFromIconfontCN} from '@ant-design/icons'
+/* eslint-disable import/no-extraneous-dependencies */
+import { createFromIconfontCN } from '@ant-design/icons'
 
- const IconFont = createFromIconfontCN({
-   scriptUrl: [
-     '//at.alicdn.com/t/font_1538571_lc0lv5vhp4q.js'
-   ]
- })
+const IconFont = createFromIconfontCN({
+  scriptUrl: ['//at.alicdn.com/t/font_1538571_lc0lv5vhp4q.js'],
+})
 
- export default IconFont
+export default IconFont

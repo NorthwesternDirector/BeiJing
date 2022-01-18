@@ -15,6 +15,7 @@
     "eslint": "^7.23.0",
     "less": "^3.13.1",
     "less-loader": "^7.3.0",
+    "linters-self-fe": "^1.0.0",
     "lodash": "^4.17.21",
     "moment": "^2.29.1",
     "prettier": "^2.2.1",

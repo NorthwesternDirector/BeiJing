@@ -1,54 +1,58 @@
-import React, {useState, useEffect, useCallback} from 'react'
+import React, { useState, useEffect } from 'react'
 import ReactECharts from 'echarts-for-react'
-import { sleepData } from '../daliyData-2021' 
+import { sleepData } from '../daliyData-2021'
 
 const BASE_TIME = '2021-12-06'
 
 const useTimeNodeChart = () => {
   const [options, setOptions] = useState({})
 
-   /**设置图表 */
-   useEffect(() => {
-    const series = ['ssleep','msleep', 'mgow', 'sgow']
+  /** 设置图表 */
+  useEffect(() => {
+    const series = ['ssleep', 'msleep', 'mgow', 'sgow']
     const dimensions = ['日期', 'ssleep', 'msleep', 'mgow', 'sgow']
-    let temp =  {
+    const temp = {
       // https://coolors.co/palettes/trending
       // https://zhuanlan.zhihu.com/p/27198138
-      color:['#6E3CBC','#D47AE8', '#F4BEEE', '#98BAE7'],
+      color: ['#6E3CBC', '#D47AE8', '#F4BEEE', '#98BAE7'],
       grid: { top: 50, right: 24, bottom: 56, left: 50 },
       dataset: {
         dimensions,
         source: sleepData.map(i => ({
-          ...i, 
-          ssleep:`${BASE_TIME} ${i.ssleep}`, 
-          msleep:`${BASE_TIME} ${i.msleep}`,
-          mgow:`${BASE_TIME} ${i.mgow}`,
-          sgow:`${BASE_TIME} ${i.sgow}`
+          ...i,
+          ssleep: `${BASE_TIME} ${i.ssleep}`,
+          msleep: `${BASE_TIME} ${i.msleep}`,
+          mgow: `${BASE_TIME} ${i.mgow}`,
+          sgow: `${BASE_TIME} ${i.sgow}`,
         })),
       },
       xAxis: {
         type: 'category',
         axisLabel: {
-          formatter: val=>val.slice(5)
+          formatter: val => val.slice(5),
         },
       },
       yAxis: {
-        type:'time', 
-        min:`${BASE_TIME} 18:30:00`,
-        max:`${BASE_TIME} 23:59:59`,
+        type: 'time',
+        min: `${BASE_TIME} 18:30:00`,
+        max: `${BASE_TIME} 23:59:59`,
       },
-      series: series.map(i=>({ type: 'line', smooth: true})),
+      series: series.map(() => ({ type: 'line', smooth: true })),
       tooltip: {
         trigger: 'axis',
-        formatter: function (params) {
+        formatter(params) {
           let res = `${params[0].name} <br/>`
           for (const item of params) {
             if (item.value[item.seriesName]) {
-              res += `<span style="background: ${item.color}; height:10px; width: 10px; border-radius: 50%;display: inline-block;margin-right:10px;"></span> ${item.seriesName} ：${item.value[item.seriesName].slice(11)}<br/>`
+              res += `<span style="background: ${
+                item.color
+              }; height:10px; width: 10px; border-radius: 50%;display: inline-block;margin-right:10px;"></span> ${
+                item.seriesName
+              } ：${item.value[item.seriesName].slice(11)}<br/>`
             }
           }
           return res
-        }
+        },
       },
       dataZoom: [
         {
@@ -90,16 +94,13 @@ const useTimeNodeChart = () => {
       ],
       legend: {
         type: 'scroll',
-        top: 6
-      }
+        top: 6,
+      },
     }
     setOptions(temp)
   }, [])
 
-
-  return [
-    <ReactECharts option={options} style={{height: 350}}/>
-  ]
+  return [<ReactECharts option={options} style={{ height: 350 }} />]
 }
 
 export default useTimeNodeChart
