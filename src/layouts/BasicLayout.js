@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route, Redirect } from 'react-router-dom'
+import { Route, Redirect, Link } from 'react-router-dom'
 import { ConfigProvider, Switch } from 'antd'
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { SmileOutlined } from '@ant-design/icons'
@@ -7,6 +7,7 @@ import { SmileOutlined } from '@ant-design/icons'
 import classNames from 'classnames/bind'
 import Home from '@/views/Home'
 import Time from '@/views/time'
+import Resume from '@/views/resume'
 import IconFont from '@/components/IconFont'
 import styles from './BasicLayout.module.less'
 import 'antd/dist/antd.css'
@@ -29,6 +30,13 @@ const routeConfig = {
       path: '/time',
       exact: true,
       component: Time,
+    },
+    {
+      icon: <SmileOutlined />,
+      name: '',
+      path: '/resume',
+      exact: true,
+      component: Resume,
     },
     {
       icon: <SmileOutlined />,
@@ -67,8 +75,8 @@ const BasicLayout = () => {
     <div className={cx('basic-layout')}>
       <div className={cx('basic-layout-header')}>
         <div className={cx('menu')}>
-          <div>TM</div>
-          <div>ANN</div>
+          <Link to="/time">Time</Link>&nbsp;
+          <Link to="/resume">Resume</Link>
         </div>
         <Switch
           checkedChildren={<IconFont type="" />}
