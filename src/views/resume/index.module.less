@@ -10,25 +10,9 @@
   border: 2px solid #eee;
 }
 
-.top {
-  display: flex;
-  height: 30%;
-  font-size: 15px;
-  & > div:first-child {
-    display: flex;
-    flex-basis: 35%;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-  }
-  & > div {
-    flex-basis: 65%;
-    padding: 20px;
-  }
-}
 .content {
   display: flex;
-  height: 65%;
+  height: 100%;
   font-size: 15px;
   & > div:first-child {
     flex-basis: 35%;
@@ -44,14 +28,30 @@
   width: 100px !important;
   height: 100px !important;
 }
-.margin6 {
-  margin-bottom: 6px;
-}
+
 .margin2 {
   margin-bottom: 2px;
 }
+.margin6 {
+  margin-bottom: 6px;
+}
+.margin8 {
+  margin-bottom: 8px;
+}
+.margin12 {
+  margin-bottom: 12px;
+}
+.margin16 {
+  margin-bottom: 16px;
+}
 .margin20 {
   margin-bottom: 20px;
+}
+.margin24 {
+  margin-bottom: 24px;
+}
+.margin30 {
+  margin-bottom: 30px;
 }
 .h1 {
   margin-bottom: 4px;
@@ -94,7 +94,7 @@
 
 .dot {
   display: inline-block;
-  width: 5px;
+  min-width: 5px;
   height: 5px;
   margin-right: 4px;
   background-color: black;
@@ -113,4 +113,11 @@
 
 .color-gray {
   color: rgba(0, 0, 0, 0.5);
+}
+
+.personal-info-part{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 24px;
 }
