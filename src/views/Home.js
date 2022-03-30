@@ -1,5 +1,6 @@
 import React from 'react'
 import { Pagination, Row, Col } from 'antd'
+import './test'
 
 const Home = () => {
   return (

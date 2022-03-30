@@ -104,12 +104,12 @@ const Resume = () => {
               <div>
                 <strong>技术要点: </strong>
                 1⃣️ 利用事件流及事件监听原理，优化用户在移动端图表操作体验 2⃣️ 利用原生 table
-                元素实现诸如行列的滚动吸顶、按层级展开收起、列自动定位等功能 3⃣️ 利用 Intersection
-                Observer API 及 Performance API 优化项目埋点性能监测策略。
+                元素实现诸如行列滚动吸顶、按层级展开收起、列自动定位等功能 3⃣️ 利用 Intersection
+                Observer API 及 Performance API 优化项目性能监测策略，并借助 Elastic APM 能力在
+                Kibana 中进行可视化展示及交互式查询。
                 <Tag>React</Tag>
-                <Tag>Antd</Tag>
                 <Tag>Echarts</Tag>
-                <Tag>Intersection observer API</Tag>
+                <Tag>Performance API</Tag>
               </div>
             </div>
           </div>
@@ -119,7 +119,7 @@ const Resume = () => {
             <span className={cx('date')}>2019.11-2020.01</span>
           </div>
           <div className={cx('h4', 'project')}>
-            鹰眼系统<span className={cx('date')}>产品信息监控平台</span>
+            鹰眼系统<span className={cx('date')}>产品口碑分析平台</span>
           </div>
         </div>
         <div className={cx('footer-part')}>
@@ -129,8 +129,8 @@ const Resume = () => {
               <div>
                 <span className={cx('point')} />
                 熟悉 React 函数式组件开发及 React Hooks 的使用，对 React
-                不同的状态管理方案有一定的实践；熟悉 ES6 常用特性；掌握 CSS 基本布局；了解 CAS、HTTP
-                及单点登录相关知识。
+                不同的状态管理方案有一定的实践；掌握(JS/CSS/HTML)前端基础，熟悉 ES6 常用特性；了解
+                HTTP 及 Cookie 相关知识。
               </div>
               <div>
                 <span className={cx('point')} />
