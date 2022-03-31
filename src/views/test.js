@@ -1,4 +1,4 @@
-// #region promise.all 实现
+// #region 1 promise.all 实现
 Promise.all2 = function (promises) {
   const results = []
   return new Promise(function (resolve, reject) {
@@ -40,4 +40,48 @@ Promise.all2 = function (promises) {
 //   data => console.log(`对了--${data}`),
 //   err => console.log(`错了--${err}`),
 // )
+// #endregion
+
+// #region 2 debouce/throttle
+function debouce(fn, wait, immediate) {
+  let timeout = null
+  return function (args) {
+    const context = this
+    if (timeout !== null) {
+      clearTimeout(timeout)
+    }
+    if (immediate) {
+      const callNow = !timeout
+      if (callNow) {
+        fn.apply(context, args)
+      }
+      timeout = setTimeout(function () {
+        timeout = null
+      }, wait)
+    } else {
+      timeout = setTimeout(function () {
+        fn.apply(context, args)
+      }, wait)
+    }
+  }
+}
+// const hundle = function () {
+//   console.log(Math.random())
+// }
+// window.addEventListener('click', debouce(hundle, 1000))
+
+function throttle(fn, delay) {
+  let canrun = true
+  return function (args) {
+    const context = this
+    if (!canrun) {
+      return
+    }
+    canrun = false
+    setTimeout(function () {
+      fn.apply(context, args)
+      canrun = true
+    }, delay)
+  }
+}
 // #endregion
