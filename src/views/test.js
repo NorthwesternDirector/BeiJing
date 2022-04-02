@@ -42,7 +42,19 @@ Promise.all2 = function (promises) {
 // )
 // #endregion
 
-// #region 2 debouce/throttle
+// #region 2 promise.all 实现 Promise.allSettled
+Promise.allSettled = promises => {
+  return Promise.all(
+    promises.map(promise => {
+      return promise
+        .then(value => ({ status: 'fulfilled', value }))
+        .catch(reason => ({ status: 'rejected', reason }))
+    }),
+  )
+}
+// #endregion
+
+// #region 3 debouce/throttle
 function debouce(fn, wait, immediate) {
   let timeout = null
   return function (args) {
