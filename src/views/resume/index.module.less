@@ -28,7 +28,7 @@
 .content {
   height: 100%;
   font-size: 15px;
-  padding: 0px 24px 12px;
+  padding: 0px 24px 0px;
   :global{
     .ant-divider-horizontal {
       margin: 0px;
@@ -47,6 +47,9 @@
 
 .margin2 {
   margin-bottom: 2px;
+}
+.margin4 {
+  margin-bottom: 4px;
 }
 .margin6 {
   margin-bottom: 6px;
@@ -98,7 +101,7 @@
   }
 }
 .h4 {
-  font-size: 16px;
+  font-size: 17px;
   font-weight: 500;
   color: rgba(0, 0, 0, 0.9);
   &--light {
@@ -161,13 +164,14 @@
   }
 }
 .personal-info-part {
+  color: rgba(0, 0, 0, 0.9);
   position: absolute;
   bottom: 30px;
   left: 250px;
   background-color: rgba(256, 256, 256, 0.2);
   padding: 4px 20px 0px 10px;
-  border-bottom-right-radius: 24px;
-  border-top-right-radius: 4px;
+  border-bottom-right-radius: 6px;
+  border-top-right-radius: 6px;
   & > p {
     margin-bottom: 4px;
   }
@@ -187,8 +191,10 @@
 .project {
   background: rgba(0, 0, 0, 0.03);
   padding: 4px 8px;
-  border-top-right-radius: 6px;
-  border-bottom-right-radius: 6px;
+  border-radius: 6px;
+  display: flex;
+  // justify-content: center;
+  align-items: center;
 }
 
 .company-title {
@@ -220,12 +226,38 @@
 
 .p {
   text-align: justify;
+  line-height: 26px;
 }
 
 .point {
   display: inline-block;
   width: 6px;
   height: 6px;
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(0, 0, 0, 0.15);
+  border-radius: 2px;
   margin-right: 6px;
+}
+
+.inner-line {
+  padding: 0px 8px;
+  font-size: 16px;
+}
+
+.color9 {
+  color: rgba(0, 0, 0, 0.9);
+}
+
+.color8 {
+  color: rgba(0, 0, 0, 0.8);
+}
+.page{
+  display: flex;
+  justify-content: center;
+  color: rgba(0, 0, 0, 0.2);
+  padding-bottom: 12px;
+}
+
+.new-page {
+  padding-top: 24px;
+  font-size: 16px;
 }
