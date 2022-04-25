@@ -55,6 +55,7 @@ Promise.allSettled = promises => {
 // #endregion
 
 // #region 3 debouce/throttle
+// debounce 等事件被触发的 n 秒后再进行调用，如果 n 秒内再次被触发，则重新计时，理解为执行频繁调用事件的最后一次
 // eslint-disable-next-line no-unused-vars
 function debouce(fn, wait, immediate) {
   let timeout = null
@@ -83,6 +84,7 @@ function debouce(fn, wait, immediate) {
 // }
 // window.addEventListener('click', debouce(hundle, 1000))
 
+// throttle 等事件被触发的 n 秒后再进行调用，如果 n 秒内多次触发，则只执行一次，理解为按指定间隔执行频繁调用事件
 // eslint-disable-next-line no-unused-vars
 function throttle(fn, delay) {
   let canrun = true
@@ -110,6 +112,21 @@ function throttle(fn, delay) {
 // fn = currying(fn)
 // fn(1)(2)(3, 4)
 // fn(1, 2)(3)(4)
+
+// function currying() {
+//   const args = Array.prototype.slice.call(arguments)
+//   const add = function () {
+//     const arg2 = Array.prototype.slice.call(arguments)
+//     args.push(...arg2)
+//     return arg2.length === 0 ? add.toString() : add
+//   }
+//   add.toString = function () {
+//     return args.reduce((acc, cur) => acc + cur)
+//   }
+//   return args.length === 0 ? 0 : add
+// }
+// currying(1,2)(3)(4,5)() //15
+// currying() //0
 // #endregion
 
 // #region 5 add one
@@ -120,7 +137,7 @@ const a = {
   },
 }
 // console.log(a == 1 && a == 2 && a == 3)
-
+// 闭包
 const addOne = (function () {
   let index = 0
   const fn = function () {
@@ -243,6 +260,27 @@ Array.prototype.map = function (fn) {
   }, [])
 }
 // console.log([1, 2, 3].map(item => item ** 2))
+// #endregion
+
+// #region 8.1 实现 reduce
+// eslint-disable-next-line no-extend-native
+Array.prototype.reduce2 = function (fn, initValue) {
+  const arr = Array.prototype.slice.call(this)
+  if (!arr.length) {
+    // eslint-disable-next-line no-useless-return
+    return
+  }
+  let res = initValue || arr[0]
+  for (let i = initValue ? 0 : 1; i < arr.length; i++) {
+    res = fn(res, arr[i], i, this)
+  }
+  // eslint-disable-next-line consistent-return
+  return res
+}
+// console.log(
+//   [1, 2, 3].reduce2((acc, cur) => acc + cur),
+//   888,
+// )
 // #endregion
 
 // #region 9 call/apply/bind
@@ -404,6 +442,27 @@ console.log(stu)
 // stu.eat()
 // #endregion
 
+// #region 13 reducer&context
+// const MyContext = React.createContext()
+// const reducer = (state, action) => {
+//   return { ...state, [action.type]: action.value }
+// }
+
+// const Father = () => {
+//   const [state, dispatch] = useReducer(reducer, {})
+//   return (
+//     <MyContext.Provider value={{ state, dispatch }}>
+//       <Son />
+//     </MyContext.Provider>
+//   )
+// }
+
+// const Son = () => {
+//   const { state, dispatch } = useContext(MyContext)
+//   // dispatch({ type: 'add', value: {}})
+// }
+// #endregion
+
 // #region 树的遍历
 // eslint-disable-next-line no-unused-vars
 const TreeNode = {
@@ -520,6 +579,36 @@ const lengthOfLongestSubstring = function (s) {
 lengthOfLongestSubstring('qrwertrwrs')
 // #endregion
 
+// #region xhr
+const params = ['id=123', 'limit=10']
+// eslint-disable-next-line no-unused-vars
+function getDate(url) {
+  return new Promise((resolve, reject) => {
+    const xhr = new XMLHttpRequest()
+    xhr.onreadystatechange = function () {
+      // UNSENT 0、OPENED 1、LOADING 3、DONE 4
+      if (xhr.readyState === 4) {
+        if ((xhr.status >= 200 && xhr.status < 300) || xhr.status === 304) {
+          try {
+            const response = JSON.parse(xhr.responseText)
+            resolve(response)
+          } catch (e) {
+            reject(e)
+          }
+        } else {
+          reject(new Error(`request fails:${xhr.statusText}`))
+        }
+      }
+    }
+    // .open() 用于初始化 xhr 对象，传入基础参数：http方法/请求url/是否异步执行
+    xhr.open('GET', `${url}?${params.join('&')}`, true)
+    // .send(body）用于发送 HTTP 请求
+    // 如果是异步请求则此方法会在请求发送后立即返回；如果是同步请求则此方法直到响应到达后才会返回
+    xhr.send(null)
+  })
+}
+// #endregion
+
 // #region 二分查找
 // eslint-disable-next-line
 function find(arr, item) {
@@ -537,4 +626,23 @@ function find(arr, item) {
     }
   }
 }
+// #endregion
+
+// #region 模板字符串
+// eslint-disable-next-line no-unused-vars
+const aa = 'a1'
+// eslint-disable-next-line no-unused-vars
+const bb = 'b1'
+// eslint-disable-next-line no-template-curly-in-string
+const str = 'abc${aa}abc${bb}'
+const replace = str => {
+  const reg = /\$\{([^}]+)\}/g
+  return str.replace(reg, function (matched, key) {
+    console.log(matched, key)
+    // eslint-disable-next-line no-eval
+    return eval(key)
+  })
+}
+console.log(replace(str))
+
 // #endregion
